@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff4f88">
+<title>A Very Important Question 💌</title>
+<style>
+:root{--pink:#ff4f88;--pink2:#ff9fbc;--hot:#ff2f72;--ink:#4a2535;--muted:#916877;--cream:#fff9fc;--line:#ffd7e5;--card:rgba(255,255,255,.92)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 10%,#fff 0 8%,transparent 35%),radial-gradient(circle at 90% 20%,#ffe5ef 0 10%,transparent 40%),linear-gradient(135deg,#fff5f9,#ffe0eb);overflow-x:hidden}
+button,input{font:inherit}button{cursor:pointer}
+#bgHearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float{position:absolute;bottom:-30px;animation:up linear forwards;opacity:0;filter:drop-shadow(0 5px 8px rgba(120,30,70,.08))}@keyframes up{10%{opacity:.65}100%{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.app{position:relative;z-index:1;min-height:100vh;display:grid;place-items:center;padding:18px}
+.page{display:none;width:min(820px,100%);animation:in .45s ease}.page.active{display:block}@keyframes in{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+.card{position:relative;overflow:hidden;background:var(--card);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.95);border-radius:32px;padding:32px 24px;box-shadow:0 28px 90px rgba(128,38,74,.16);text-align:center}
+.card:before,.card:after{content:"";position:absolute;border-radius:50%;pointer-events:none}.card:before{width:220px;height:220px;right:-90px;top:-100px;background:rgba(255,184,208,.23)}.card:after{width:190px;height:190px;left:-90px;bottom:-100px;background:rgba(255,215,229,.32)}
+.badge{display:inline-flex;align-items:center;gap:7px;background:#ffe7ef;color:#c72f68;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.6px;text-transform:uppercase}
+.eyebrow{margin:16px 0 7px;color:var(--pink);font-size:12px;font-weight:950;letter-spacing:1px;text-transform:uppercase}
+h1{margin:10px 0 16px;font-size:clamp(42px,9vw,76px);line-height:.96;letter-spacing:-3px}h2{margin:10px 0 12px;font-size:clamp(29px,6vw,48px);line-height:1.04;letter-spacing:-1.5px}p{max-width:620px;margin:10px auto;font-size:17px;line-height:1.7}.highlight{color:var(--pink)}
+.bigEmoji{font-size:80px;display:block;animation:floaty 2.2s ease-in-out infinite}@keyframes floaty{50%{transform:translateY(-7px) rotate(-2deg)}}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}.btn{border:0;border-radius:999px;padding:14px 22px;font-weight:950;transition:.18s;box-shadow:0 10px 24px rgba(120,42,76,.12)}.btn:hover{transform:translateY(-2px)}.primary{color:#fff;background:linear-gradient(135deg,var(--pink),var(--hot))}.secondary{color:#754254;background:#fff;border:2px solid var(--line)}.soft{color:#a34867;background:#fff5f8;border:1px dashed #ffc1d3}
+.note{display:inline-block;margin-top:15px;color:var(--muted);font-size:13px;font-weight:800}.micro{font-size:12px;color:var(--muted)}
+.stepbar{display:flex;gap:6px;max-width:580px;margin:8px auto 18px}.stepbar span{height:7px;flex:1;border-radius:99px;background:#ffe5ee}.stepbar span.on{background:linear-gradient(90deg,var(--pink),var(--pink2))}
+/* game */
+.gameHud{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:600px;margin:0 auto}.stat{background:#fff;border:1px solid #ffe1eb;border-radius:15px;padding:10px 8px;font-size:13px;font-weight:950}.arena{position:relative;width:100%;height:min(60vh,500px);min-height:340px;margin-top:18px;overflow:hidden;border-radius:26px;border:2px solid #ffe0ea;background:radial-gradient(circle at 30% 15%,#fff 0 9%,transparent 25%),linear-gradient(180deg,#fffaff,#ffe7f0);touch-action:manipulation}.arena:before{content:"♥  ♥  ♥";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,80,140,.065);font-size:70px;letter-spacing:30px}.fall{position:absolute;top:-56px;width:52px;height:52px;display:grid;place-items:center;font-size:35px;z-index:3;user-select:none;animation:fall var(--t) linear forwards;filter:drop-shadow(0 7px 8px rgba(130,30,70,.16))}@keyframes fall{to{transform:translateY(calc(100vh - 20px)) rotate(24deg)}}.cross{position:absolute;inset:0;border-radius:26px;pointer-events:none}.shake{animation:shake .35s ease}@keyframes shake{20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-7px)}80%{transform:translateX(5px)}}
+.progress{height:12px;max-width:600px;margin:16px auto 15px;background:#ffe4ee;border-radius:99px;overflow:hidden}.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),#ffb8ce);transition:.2s}
+.msg{min-height:26px;margin:9px auto 0;font-weight:900;color:#a63f62}.speedDots{display:flex;justify-content:center;gap:5px;margin:8px}.speedDots i{width:22px;height:6px;background:#ffe4ee;border-radius:99px}.speedDots i.on{background:var(--hot)}
+/* qa */
+.qnum{font-size:13px;color:var(--muted);font-weight:900}.answer{max-width:600px;margin:22px auto 0}.input{width:100%;padding:15px 17px;border-radius:18px;border:2px solid #ffd9e5;background:#fff;outline:none}.input:focus{border-color:var(--pink)}.options{display:grid;gap:11px;max-width:600px;margin:22px auto 0}.opt{padding:15px 17px;border:2px solid #ffe0ea;background:#fff;border-radius:18px;text-align:left;font-weight:850;transition:.18s}.opt:hover,.opt.sel{border-color:var(--pink);background:#fff4f8;transform:translateY(-1px)}.qnav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:25px}.qnav .btn{width:auto}
+/* interlude + final */
+.secret{margin:22px auto 0;max-width:620px;background:#fff5f8;border:1px solid #ffd7e4;border-radius:22px;padding:20px;text-align:left}.secret p{margin:0;font-size:16px}.countdown{font-size:56px;font-weight:1000;color:var(--pink);letter-spacing:-2px;min-height:65px}
+.finalHeart{font-size:98px;animation:beat 1.2s infinite}@keyframes beat{20%{transform:scale(1.02)}40%{transform:scale(.98)}60%{transform:scale(1.1)}80%{transform:scale(1)}}.success{display:none;margin:20px auto 0;max-width:620px;padding:20px;background:#fff5f8;border:1px solid #ffd6e3;border-radius:22px}.success.show{display:block;animation:in .5s ease}
+/* jump */
+#jump{display:none;position:fixed;inset:0;z-index:100;background:rgba(12,4,8,.96);align-items:center;justify-content:center;padding:16px}#jump.show{display:flex;animation:flash .12s ease}@keyframes flash{0%{opacity:0}100%{opacity:1}}.jumpBox{width:min(690px,100%);text-align:center;color:#fff}.jumpBox img{width:min(510px,94vw);max-height:68vh;object-fit:cover;border-radius:20px;display:block;margin:0 auto 14px;box-shadow:0 28px 100px rgba(255,30,90,.25)}.jumpTitle{font-weight:1000;font-size:clamp(34px,8vw,64px);letter-spacing:-2px;margin:0}.jumpSub{color:#ffc6d6;font-weight:850;margin:6px 0 18px}
+/* confetti */
+.conf{position:fixed;top:-20px;width:9px;height:15px;z-index:90;animation:conf 2.8s linear forwards}@keyframes conf{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+@media(max-width:620px){.app{padding:12px}.card{padding:27px 16px;border-radius:27px}.gameHud{grid-template-columns:1fr 1fr 1fr}.btn{width:100%}.qnav .btn{width:auto;flex:1}.arena{min-height:360px}}
+</style>
+</head>
+<body>
+<div id="bgHearts"></div>
+<div class="app">
+
+<section class="page active" id="intro">
+  <div class="card">
+    <span class="badge">💌 TOP SECRET MISSION</span>
+    <span class="bigEmoji">🐾</span>
+    <p class="eyebrow">For one very special person</p>
+    <h1>I have a question<br><span class="highlight">for you.</span></h1>
+    <p>But before I ask it, you have to survive a tiny little adventure I made just for you. 😌</p>
+    <div class="secret"><p><strong>Mission briefing:</strong> catch some hearts, answer a few random questions, and make it all the way to the end. There may or may not be a very important question waiting for you. 👀</p></div>
+    <div class="actions"><button class="btn primary" onclick="startMission()">Begin the mission 💗</button></div>
+    <span class="note">No cheating. Joshua is watching. 👁️👁️</span>
+  </div>
+</section>
+
+<section class="page" id="countdown">
+  <div class="card"><span class="badge">STAGE 1 · GET READY</span><h2>Catch the falling hearts 💗</h2><p>20 hearts. The speed gets faster. Miss one and you go straight back to <strong>0</strong>.</p><div class="countdown" id="count">3</div><span class="note">Prepare those fingers.</span></div>
+</section>
+
+<section class="page" id="game">
+  <div class="card">
+    <span class="badge">STAGE 1 · HEART HUNTER</span>
+    <h2>Catch <span class="highlight">20 hearts</span></h2>
+    <p>Tap/click the heart before it reaches the bottom. Every heart makes the next one a little faster.</p>
+    <div class="progress"><span id="bar"></span></div>
+    <div class="gameHud"><div class="stat">💗 Caught <span id="caught">0</span>/20</div><div class="stat">⚡ Speed <span id="speed">1</span>x</div><div class="stat">🔥 Streak <span id="streak">0</span></div></div>
+    <div class="speedDots" id="dots"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="msg" id="gameMsg">Ready? Here comes the first one.</div>
+    <div class="arena" id="arena"></div>
+    <div class="actions"><button class="btn secondary" onclick="restartGame()">Restart ↻</button></div>
+  </div>
+</section>
+
+<section class="page" id="q1"><div class="card"><span class="badge">STAGE 2 · Q&A</span><div class="stepbar"><span class="on"></span><span></span><span></span><span></span><span></span></div><div class="qnum">Question 1 of 5</div><h2>What's your <span class="highlight">favourite food?</span> 🍜</h2><p>No wrong answers. I'm just curious what your answer is. 👀</p><div class="answer"><input class="input" id="a1" placeholder="Type your answer…"></div><div class="qnav"><span class="micro">Be honest 💗</span><button class="btn primary" onclick="goQ('q2')">Next →</button></div></div></section>
+
+<section class="page" id="q2"><div class="card"><span class="badge">STAGE 2 · Q&A</span><div class="stepbar"><span class="on"></span><span class="on"></span><span></span><span></span><span></span></div><div class="qnum">Question 2 of 5</div><h2>What's the weirdest <span class="highlight">fact about Joshua</span> you know? 😂</h2><p>There are probably too many to choose from.</p><div class="answer"><input class="input" id="a2" placeholder="Your answer…"></div><div class="qnav"><button class="btn secondary" onclick="showPage('q1')">← Back</button><button class="btn primary" onclick="goQ('q3')">Next →</button></div></div></section>
+
+<section class="page" id="q3"><div class="card"><span class="badge">STAGE 2 · Q&A</span><div class="stepbar"><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="qnum">Question 3 of 5</div><h2>What type of <span class="highlight">cig</span> do you like best?</h2><p>Pick whatever fits you best.</p><div class="options" id="cig"><div class="opt" onclick="pick(this)">The one I usually smoke 🚬</div><div class="opt" onclick="pick(this)">Something light</div><div class="opt" onclick="pick(this)">Something stronger</div><div class="opt" onclick="pick(this)">I don't smoke</div><div class="opt" onclick="pick(this)">Other / secret answer 👀</div></div><div class="qnav"><button class="btn secondary" onclick="showPage('q2')">← Back</button><button class="btn primary" onclick="goQ('q4')">Next →</button></div></div></section>
+
+<section class="page" id="q4"><div class="card"><span class="badge">STAGE 2 · Q&A</span><div class="stepbar"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></div><div class="qnum">Question 4 of 5</div><h2>Do you <span class="highlight">love Oreo?</span> 🍪</h2><p>Again, there is no wrong answer. (This is a judgment-free zone.)</p><div class="options"><div class="opt" onclick="pick(this)">YES. Oreo supremacy. 🍪👑</div><div class="opt" onclick="pick(this)">Sometimes!</div><div class="opt" onclick="pick(this)">Not really 😭</div><div class="opt" onclick="pick(this)">I am Oreo-neutral.</div></div><div class="qnav"><button class="btn secondary" onclick="showPage('q3')">← Back</button><button class="btn primary" onclick="goQ('q5')">Next →</button></div></div></section>
+
+<section class="page" id="q5"><div class="card"><span class="badge">STAGE 2 · FINAL QUESTION</span><div class="stepbar"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div><div class="qnum">Question 5 of 5</div><h2>Do you love <span class="highlight">Joshua enough?</span> 🥹</h2><p>This is the only question where I'm going to be dramatic about the answer.</p><div class="actions"><button class="btn primary" onclick="loveYes()">YES 💗</button><button class="btn secondary" onclick="loveNo()">NO 😭</button></div><span class="note">Warning: NO activates the emergency Joshua system. 🚨</span></div></section>
+
+<section class="page" id="interlude"><div class="card"><span class="badge">🔓 STAGE 3 · UNLOCKED</span><span class="bigEmoji">💗</span><p class="eyebrow">Okay… you made it.</p><h2>One last thing before I ask.</h2><div class="secret"><p>I could have just asked you directly, but that would have been boring. So I made you catch 20 hearts, answer random questions, and survive the most unnecessary quiz ever. 😂</p><p style="margin-top:12px"><strong>But I made it because there's something I've genuinely been wanting to say.</strong></p></div><div class="actions"><button class="btn primary" onclick="showPage('important')">Tell me already 👀</button></div></div></section>
+
+<section class="page" id="important"><div class="card"><span class="badge">💌 THE IMPORTANT QUESTION</span><div class="finalHeart">💗</div><p class="eyebrow">No more games.</p><h1>Can I be<br><span class="highlight">your boyfriend?</span></h1><div class="secret"><p>I really like you. I love the little moments, the stupid jokes, and the way you make ordinary days feel a little more special. So I wanted to ask you properly.</p><p style="margin-top:10px"><strong>Can I be your boyfriend? 🥹</strong></p></div><div class="actions"><button class="btn primary" onclick="finalYes()">YES, YOU CAN 💕</button><button class="btn secondary" id="maybeBtn" onclick="maybeMessage()">I need a moment…</button></div><div class="success" id="success"><h2 style="margin:0 0 8px">WAIT… REALLY?! 😭💗</h2><p style="margin:0">Okay. Then it's official. I am smiling like an idiot right now.</p><div style="font-size:38px;margin-top:10px">🫶🏻💐🍪💗✨</div></div></div></section>
+
+</div>
+
+<div id="jump"><div class="jumpBox"><img src="jumpscare.png" alt="Very serious Joshua emergency"><p class="jumpTitle">WRONG ANSWER. 😭</p><p class="jumpSub">Emergency Joshua has entered the chat. Please reconsider.</p><button class="btn primary" onclick="closeJump()">Okay okay… back to the question 😭</button></div></div>
+
+<script>
+/* ===== QUICK CUSTOMISATION ===== */
+const HER_NAME = ""; // Example: "Samantha". Leave blank if you don't want a name shown.
+
+const pages=[...document.querySelectorAll('.page')];
+function showPage(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='game')setTimeout(beginGame,250)}
+function startMission(){showPage('countdown');let n=3;const el=document.getElementById('count');el.textContent=n;const timer=setInterval(()=>{n--;el.textContent=n>0?n:'GO! 💗';if(n<=0){clearInterval(timer);setTimeout(()=>showPage('game'),450)}},900)}
+function goQ(id){showPage(id)}
+function pick(el){el.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');playTone(520,0.06)}
+
+// background hearts
+setInterval(()=>{const h=document.createElement('div');h.className='float';h.textContent=['♥','💗','💕','♡','✦'][Math.floor(Math.random()*5)];h.style.left=(Math.random()*100)+'vw';h.style.fontSize=(14+Math.random()*20)+'px';h.style.animationDuration=(5+Math.random()*5)+'s';document.getElementById('bgHearts').appendChild(h);setTimeout(()=>h.remove(),11000)},700);
+
+// sound (no external audio files needed)
+let audioCtx=null;
+function playTone(freq=620,dur=.08){try{audioCtx ||= new (window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.05,audioCtx.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+dur);o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur+.02)}catch(e){}}
+
+// game
+const GOAL=20;let caught=0,streak=0,running=false,timer=null,token=0;
+function resetUI(){document.getElementById('caught').textContent=caught;document.getElementById('streak').textContent=streak;const speed=Math.min(5,1+Math.floor(caught/4));document.getElementById('speed').textContent=speed;document.getElementById('bar').style.width=(caught/GOAL*100)+'%';[...document.querySelectorAll('#dots i')].forEach((x,i)=>x.classList.toggle('on',i<speed))}
+function clearHearts(){document.querySelectorAll('.fall').forEach(x=>x.remove())}
+function beginGame(){restartGame(true)}
+function restartGame(silent=false){token++;const my=token;running=false;clearTimeout(timer);clearHearts();caught=0;streak=0;running=true;resetUI();document.getElementById('gameMsg').textContent=silent?'Ready? Catch the first one!':'Restarted. Back to 0 — you've got this 💪🏻';schedule(my)}
+function schedule(my){if(!running||my!==token)return;const delay=Math.max(360,900-caught*28);timer=setTimeout(()=>spawn(my),delay)}
+function spawn(my){if(!running||my!==token)return;const arena=document.getElementById('arena');const h=document.createElement('div');h.className='fall';h.textContent=['💗','💖','💘'][Math.floor(Math.random()*3)];h.style.left=(10+Math.random()*Math.max(20,arena.clientWidth-70))+'px';const speed=Math.min(5,1+Math.floor(caught/4));const sec=Math.max(1.05,4.0/speed);h.style.setProperty('--t',sec+'s');let clicked=false;h.onpointerdown=e=>{e.preventDefault();if(clicked||!running)return;clicked=true;caught++;streak++;resetUI();playTone(560+caught*8,.06);h.remove();if(caught>=GOAL){running=false;clearTimeout(timer);clearHearts();document.getElementById('gameMsg').textContent='20/20! YOU DID IT! 💕';playTone(880,.16);setTimeout(()=>showPage('q1'),900)}else{document.getElementById('gameMsg').textContent=caught<5?'Nice! 💗':caught<12?'Getting faster… 😈':caught<18?'DON’T BLINK. 😳':'FINAL STRETCH. 🔥';schedule(my)}};h.onanimationend=()=>{if(clicked||!running||my!==token)return;clicked=true;failGame()};arena.appendChild(h)}
+function failGame(){running=false;token++;clearTimeout(timer);clearHearts();streak=0;const a=document.getElementById('arena');a.classList.remove('shake');void a.offsetWidth;a.classList.add('shake');document.getElementById('gameMsg').textContent='YOU MISSED IT. 😭 Back to 0. No mercy.';playTone(170,.18);setTimeout(()=>restartGame(true),1100)}
+
+function loveYes(){showPage('interlude');playTone(760,.12)}
+function loveNo(){document.getElementById('jump').classList.add('show');playTone(120,.25);if(navigator.vibrate)navigator.vibrate([120,60,180])}
+function closeJump(){document.getElementById('jump').classList.remove('show');showPage('q5')}
+
+function finalYes(){document.getElementById('success').classList.add('show');document.getElementById('maybeBtn').style.display='none';burst();playTone(740,.12);setTimeout(()=>playTone(880,.12),140);setTimeout(()=>playTone(1040,.16),280)}
+function maybeMessage(){const b=document.getElementById('maybeBtn');b.textContent='Okay… take your time 🥹';b.classList.remove('secondary');b.classList.add('soft');}
+function burst(){for(let i=0;i<70;i++){const c=document.createElement('div');c.className='conf';c.style.left=Math.random()*100+'vw';c.style.background=['#ff4f88','#ffd166','#ff9fbc','#ff6f91','#ffffff'][Math.floor(Math.random()*5)];c.style.transform=`rotate(${Math.random()*90}deg)`;c.style.animationDelay=(Math.random()*.8)+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3600)}}
+
+if(HER_NAME){document.title=`For ${HER_NAME} 💗`;document.querySelectorAll('.card').forEach(()=>{});}
+</script>
+</body>
+</html>
